@@ -8,11 +8,14 @@
 
 <table>
     <tr>
-      <th>Text</th>
+      <th>Messages in this thread</th>
     </tr>
     {% for message in messages %}
     <tr>
-      <td>{{ message.text }}</td>
+      <td>
+          {{ message.text }}
+          <hr>
+      </td>
     </tr>
     {% endfor %}
   </table>

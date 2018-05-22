@@ -2,6 +2,21 @@
 
 {% block body %}
 <p>
-  Hei maailma!
+  Index page!
 </p>
+
+<table>
+  <tr>
+    <th>Current threads</th>
+  </tr>
+  {% for thread in threads %}
+  <tr>
+    <td>
+      <a href="{{ url_for('messages_index', thread=thread) }}">
+        {{ thread }}
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
 {% endblock %}
