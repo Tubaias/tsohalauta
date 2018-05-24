@@ -1,6 +1,8 @@
 # Tsohalauta
 
-Tietokantasovellusharjoitus-kurssia varten toteutettava harjoitustyö.
+Tietokantasovellusharjoitus-kurssia varten toteutettava harjoitustyö.  
+
+https://tsohalankku.herokuapp.com/
 
 ## Aihekuvaus
 
