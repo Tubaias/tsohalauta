@@ -4,7 +4,7 @@ Tietokantasovellusharjoitus-kurssia varten toteutettava harjoitustyö.
 
 [Sovellus Herokussa](https://tsohalankku.herokuapp.com/)  
 
-[Käyttötapaukset](https://github.com/Tubaias/tsohalauta/blob/master/documentation/userstories.md)  
+[User storyt](https://github.com/Tubaias/tsohalauta/blob/master/documentation/userstories.md)  
 
 [Tietokantakaaviohahmotelma](https://github.com/Tubaias/tsohalauta/blob/master/documentation/db_diagram.png)
 
