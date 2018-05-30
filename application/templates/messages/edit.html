@@ -18,7 +18,13 @@
 <h4 class=lesspaddedheader>New message text</h4>
 
 <form method="POST" action="{{ url_for('messages_edit', thread=message.thread_id, message=message) }}">
-  <input type="text" name="text"/>
+  {{ form.text }}
   <input type="submit" value="Edit message"/>
 </form>
+
+<ul>
+  {% for error in form.text.errors %}
+  <li>{{ error }}</li>
+  {% endfor %}
+</ul>
 {% endblock %}

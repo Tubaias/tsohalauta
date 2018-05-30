@@ -6,9 +6,15 @@
 </form>
 
 <form method="POST" action="{{ url_for('messages_create', thread=thread) }}">
-  <input type="text" name="text"/>
+  {{ form.text }}
   <input type="submit" value="Post message"/>
 </form>
+
+<ul>
+  {% for error in form.text.errors %}
+  <li>{{ error }}</li>
+  {% endfor %}
+</ul>
 
 <table>
   <h4 class=lesspaddedheader>Messages in this thread</h4>
