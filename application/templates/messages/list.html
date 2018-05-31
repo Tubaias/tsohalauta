@@ -1,10 +1,6 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<form>
-  <button class=navbutton formaction="{{ url_for('index') }}">return to index</button>
-</form>
-
 <form method="POST" action="{{ url_for('messages_create', thread=thread) }}">
   {{ form.text }}
   <input type="submit" value="Post message"/>
@@ -21,11 +17,16 @@
   {% for message in messages %}
   <tr>
     <td>
-      {{ message.text }}
-      <form class=editform>
-        <button class=editbutton formaction="{{ url_for('messages_single', message=message.id) }}">edit</button>
-      </form>
-      <hr>
+      <div style="background-color:rgb(210, 243, 243)">
+        <form class=inlineform>
+          <button class=editbutton formaction="{{ url_for('messages_single', message=message.id) }}">info</button>
+        </form>
+
+        {{ message.date_modified}} |
+        No. {{ message.id}}
+        <br><br>
+        {{ message.text }}
+      </div>
     </td>
   </tr>
   {% endfor %}

@@ -1,8 +1,9 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
+from flask_login import login_required
+
 from application.messages.models import Message
 from application.messages.forms import MessageForm
-
 
 @app.route("/t/<thread>/", methods=["GET"])
 def messages_index(thread):
@@ -28,6 +29,7 @@ def messages_single(message):
     return render_template("messages/edit.html", message = Message.query.get(message), thread = thread_id, form = MessageForm())
 
 @app.route("/m/<message>/", methods=["POST"])
+@login_required
 def messages_edit(message):
     message_num = int(message[9:(len(message) - 1)])
     thread_id = Message.query.get(message_num).thread_id

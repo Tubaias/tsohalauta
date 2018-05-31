@@ -2,10 +2,6 @@
 
 {% block body %}
 <form>
-  <button class=navbutton formaction="{{ url_for('index') }}">return to index</button>
-</form>
-
-<form>
   <button class=navbutton formaction="{{ url_for('messages_index', thread=message.thread_id) }}">return to thread</button>
 </form>
 
