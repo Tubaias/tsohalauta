@@ -8,6 +8,10 @@ Tietokantasovellusharjoitus-kurssia varten toteutettava harjoitustyö.
 
 [Tietokantakaaviohahmotelma](https://github.com/Tubaias/tsohalauta/blob/master/documentation/db_diagram.png)
 
+## Kirjautuminen
+
+Sovelluksessa on tällä hetkellä olemassa järjestelmänvalvojatunnukset "test" salasanalla "test" ja "hello" salasanalla "world". Uusia tunnuksia voi luoda kirjoittamalla haluamansa nimen ja salasanan, ja antamamalla authorization key:n, joka on tällä hetkellä "auth". Huomioi kuitenkin, että salasanat eivät ole tällä hetkellä kryptattuja, joten älä käytä salasanaa jota käyttäisit jossain muualla.
+
 ## Aihekuvaus
 
 Harjoitustyö on yleistä lauta/chan-formaattia löysästi noudattava anonyymi keskustelufoorumi. Foorumilla on muutama vakinainen palsta, joihin sivun käyttäjät voivat tehdä uusia lankoja, joihin taas voi kirjoittaa viestejä. 
