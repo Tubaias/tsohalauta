@@ -43,9 +43,12 @@
       
       {% if current_user.is_authenticated %}
         Logged in as {{ current_user.username }} |
-        <a href="{{ url_for('auth_logout') }}">logout</a>
+        <a href="{{ url_for('auth_logout') }}"><small>logout</small></a>
       {% else %}
-        <a href="{{ url_for('auth_login') }}">login</a>
+        moderator:
+        <a href="{{ url_for('auth_login') }}"><small>login</small></a> 
+        <small>|</small>
+        <a href="{{ url_for('auth_register') }}"><small>register</small></a>
       {% endif %}
     </div>
 

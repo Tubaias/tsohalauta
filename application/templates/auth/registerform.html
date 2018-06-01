@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% for validationerror in form.username.errors %}
+  <p style="color:firebrick">Username: {{ validationerror }}</p>
+{% endfor %}
+{% for validationerror in form.password.errors %}
+  <p style="color:firebrick">Password: {{ validationerror }}</p>
+{% endfor %}
+<p style="color:firebrick">{{ error }}</p>
+
+<form method="POST" action="{{ url_for('auth_register') }}">
+  <table>
+    <tr>
+      <td>
+	{{ form.username.label }}
+      </td>
+      <td>
+	{{ form.username }}
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+	{{ form.password.label }}
+      </td>
+      <td>
+	{{ form.password }}
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+	{{ form.authkey.label }}
+      </td>
+      <td>
+	{{ form.authkey }}
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+	<input type="submit" value="Register"/>
+      </td>
+    </tr>
+</form>
+{% endblock %}

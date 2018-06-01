@@ -28,3 +28,10 @@ class User(db.Model):
 
     def is_authenticated(self):
         return True
+    
+class Authkey(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    keycode = db.Column(db.String(144), nullable=False)
+
+    def __init__(self, keycode):
+        self.keycode = key
