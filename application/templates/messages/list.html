@@ -21,7 +21,11 @@
         <form class=inlineform>
           <button class=editbutton formaction="{{ url_for('messages_single', message=message.id) }}">info</button>
         </form>
-
+        {% if message.name == "Anonymous" %}
+          <b style="color:teal; font-size:15px;">{{ message.name }}</b> |
+        {% else %}
+          <b style="color:firebrick; font-size:15px;">{{ message.name }}</b> |
+        {% endif %}
         {{ message.date_modified}} |
         No. {{ message.id}}
         <br><br>

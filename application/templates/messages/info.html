@@ -5,15 +5,22 @@
   <button class=navbutton formaction="{{ url_for('messages_index', thread=message.thread_id) }}">return to thread</button>
 </form>
 
+<h4 class=lesspaddedheader>Moderator ID</h4> 
+{{ message.moderator_id }}
+<h4 class=lesspaddedheader>Poster name</h4> 
+{{ message.name }}
 <h4 class=lesspaddedheader>Message ID</h4> 
 {{ message.id }}
-<hr>
+<h4 class=lesspaddedheader>Date created</h4> 
+{{ message.date_created }}
+<h4 class=lesspaddedheader>Date modified</h4> 
+{{ message.date_modified }}
 <h4 class=lesspaddedheader>Message text</h4>
 {{ message.text }}
 <hr>
 <h4 class=lesspaddedheader>New message text</h4>
 
-<form method="POST" action="{{ url_for('messages_edit', thread=message.thread_id, message=message) }}">
+<form method="POST" action="{{ url_for('messages_edit', message=message) }}">
   {{ form.text }}
   <input type="submit" value="Edit message"/>
 </form>
@@ -23,4 +30,9 @@
   <li>{{ error }}</li>
   {% endfor %}
 </ul>
+<hr>
+
+<form method="POST" action="{{ url_for('messages_delete', message=message) }}">
+  <input type="submit" value="Delete message"/>
+</form>
 {% endblock %}
