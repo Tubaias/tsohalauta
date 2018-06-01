@@ -10,7 +10,8 @@ Tietokantasovellusharjoitus-kurssia varten toteutettava harjoitustyö.
 
 ## Kirjautuminen
 
-Sovelluksessa on tällä hetkellä olemassa järjestelmänvalvojatunnukset "test" salasanalla "test" ja "hello" salasanalla "world". Uusia tunnuksia voi luoda kirjoittamalla haluamansa nimen ja salasanan, ja antamamalla authorization keyn, joka on tällä hetkellä "auth". Huomioi kuitenkin, että salasanat eivät ole tällä hetkellä kryptattuja, joten älä käytä salasanaa jota käyttäisit jossain muualla.
+Sovelluksessa on tällä hetkellä olemassa järjestelmänvalvojatunnukset "test" salasanalla "test" ja "hello" salasanalla "world". Uusia tunnuksia voi luoda kirjoittamalla haluamansa nimen ja salasanan, ja antamamalla authorization keyn, joka on tällä hetkellä "auth".  
+**Huomioi kuitenkin, että salasanat eivät ole tällä hetkellä kryptattuja, joten älä käytä salasanaa jota käyttäisit jossain muualla.**
 
 ## Aihekuvaus
 
