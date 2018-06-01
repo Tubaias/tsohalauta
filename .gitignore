@@ -1,6 +1,6 @@
 venv
 .vscode
-messages.db
+database.db
 
 # List of files to ignore from https://github.com/github/gitignore/blob/master/Python.gitignore
 
