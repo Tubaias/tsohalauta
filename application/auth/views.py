@@ -39,7 +39,7 @@ def auth_register():
     if user:
         return render_template("auth/registerform.html", form = form, error = "Account already exists")
 
-    key = Authkey.query.filter_by(akey=form.authkey.data).first()
+    key = Authkey.query.filter_by(keycode=form.authkey.data).first()
 
     if not key:
         return render_template("auth/registerform.html", form = form, error = "Incorrect authorization key")

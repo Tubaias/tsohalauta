@@ -31,7 +31,7 @@ class User(db.Model):
     
 class Authkey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    akey = db.Column(db.String(144), nullable=False)
+    keycode = db.Column(db.String(144), nullable=False)
 
-    def __init__(self, akey):
-        self.akey = key
+    def __init__(self, keycode):
+        self.keycode = key
