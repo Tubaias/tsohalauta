@@ -9,6 +9,8 @@ class Thread(Base):
     board_id = db.Column(db.Integer, nullable=False)
     moderator_id = db.Column(db.Integer, db.ForeignKey('moderator.id'), default=None)
 
+    messages = db.relationship("Message", lazy=True)
+
     def __init__(self, title, text, board):
         self.title = title
         self.text = text
