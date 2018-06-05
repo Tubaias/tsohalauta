@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% for validationerror in form.title.errors %}
+  <p style="color:firebrick">Title: {{ validationerror }}</p>
+{% endfor %}
+{% for validationerror in form.text.errors %}
+  <p style="color:firebrick">Text: {{ validationerror }}</p>
+{% endfor %}
+<p style="color:firebrick">{{ error }}</p>
+
+<form method="POST" action="{{ url_for('threads_create') }}">
+  <table>
+    <tr>
+      <td>
+	{{ form.title.label }}
+      </td>
+      <td>
+	{{ form.title }}
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+	{{ form.text.label }}
+      </td>
+      <td>
+	{{ form.text }}
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+	<input type="submit" value="Create thread"/>
+      </td>
+    </tr>
+</form>
+{% endblock %}

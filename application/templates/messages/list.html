@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<form method="POST" action="{{ url_for('messages_create', thread=thread) }}">
+<form method="POST" action="{{ url_for('messages_create', thread=thread.id) }}">
   {{ form.text }}
   <input type="submit" value="Post message"/>
 </form>
@@ -12,8 +12,18 @@
   {% endfor %}
 </ul>
 
+<b style="color:blue; font-size:15px;">{{ thread.title }}</b> |
+{% if thread.name == "Anonymous" %}
+  <b style="color:teal; font-size:15px;">{{ thread.name }}</b> |
+{% else %}
+  <b style="color:firebrick; font-size:15px;">{{ thread.name }}</b> |
+{% endif %}
+{{ thread.date_modified }} |
+Thread No. {{ thread.id }}
+
+<p>{{ thread.text }}</p>
+
 <table>
-  <h4 class=lesspaddedheader>Messages in this thread</h4>
   {% for message in messages %}
   <tr>
     <td>

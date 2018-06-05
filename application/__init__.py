@@ -20,6 +20,9 @@ from application import views
 from application.messages import models
 from application.messages import views
 
+from application.threads import models
+from application.threads import views
+
 from application.auth import models
 from application.auth import views
 
