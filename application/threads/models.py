@@ -15,3 +15,13 @@ class Thread(Base):
         self.title = title
         self.text = text
         self.board_id = board
+
+    @staticmethod
+    def find_threads_with_messages():
+        stmt = text("SELECT Thread.id, Thread.title, Thread.activity FROM Thread"
+                    " LEFT JOIN COUNT(Message) ON Message.thread_id = Thread.id"
+                    " GROUP BY Thread.id"
+                    " ORDER BY Thread.activity"
+                    " HAVING COUNT(Message.id) > 0")
+
+        res = db.engine.execute(stmt)
