@@ -23,7 +23,7 @@ class Thread(Base):
         stmt = text("SELECT Thread.id, Thread.title, Thread.activity AS activity, COUNT(Message.id) AS messages FROM Thread"
                     " LEFT JOIN Message ON Message.thread_id = Thread.id"
                     " GROUP BY Thread.id"
-                    " HAVING messages > 0"
+                    " HAVING COUNT(Message.id) > 0"
                     " ORDER BY activity DESC, messages DESC"
                     " LIMIT 10")
 
