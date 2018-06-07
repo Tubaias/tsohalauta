@@ -22,7 +22,15 @@ def messages_create(thread):
     if current_user.is_authenticated:
         m.moderator_id = current_user.id
         m.name = current_user.username
+        current_user.actions_taken += 1
 
+    threads = Thread.query.all()
+
+    for t in threads:
+        t.activity -= 1
+
+    current_thread = Thread.query.get(thread)
+    current_thread.activity += Thread.query.count() + 1
     db.session().add(m)
     db.session().commit()
   
@@ -43,15 +51,17 @@ def messages_edit(message):
 
     if m is None:
         return redirect(url_for("messages_index", thread=thread_id))
-    else:
-        form = MessageForm(request.form)
+        
+    form = MessageForm(request.form)
 
-        if not form.validate():
-            return render_template("messages/info.html", message = Message.query.get(message_num), thread = thread_id, form = form)
+    if not form.validate():
+        return render_template("messages/info.html", message = Message.query.get(message_num), thread = thread_id, form = form)
 
-        m.text = form.text.data
-        db.session.commit()
-        return redirect(url_for("messages_index", thread=thread_id))
+    m.text = form.text.data
+    current_user.actions_taken += 1
+    db.session.commit()
+
+    return redirect(url_for("messages_index", thread=thread_id))
 
 @app.route("/m/<message>/delete", methods=["POST"])
 @login_required
@@ -62,7 +72,17 @@ def messages_delete(message):
 
     if m is None:
         return redirect(url_for("messages_index", thread=thread_id))
-    else:
-        db.session.delete(m)
-        db.session.commit()
-        return redirect(url_for("messages_index", thread=thread_id))
+
+    threads = Thread.query.all()
+
+    for t in threads:
+        t.activity += 1
+
+    current_thread = Thread.query.get(thread_id)
+
+    current_thread.activity -= Thread.query.count() + 1
+    db.session.delete(m)
+    current_user.actions_taken += 1
+    db.session.commit()
+
+    return redirect(url_for("messages_index", thread=thread_id))

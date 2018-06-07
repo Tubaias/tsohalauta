@@ -40,6 +40,10 @@
       <form class=inlineform>
         <button class=navbutton formaction="{{ url_for('index') }}">return to index</button>
       </form>
+
+      <form class=inlineform>
+        <button class=navbutton formaction="{{ url_for('statistics_index') }}">view statistics</button>
+      </form>
       
       {% if current_user.is_authenticated %}
         Logged in as {{ current_user.username }} |

@@ -21,6 +21,10 @@ def threads_create():
         t.moderator_id = current_user.id
         t.name = current_user.username
 
+    if Thread.query.count() >= 20:
+        least_active_thread = Thread.query.order_by(Thread.activity).first()
+        db.session.delete(least_active_thread)
+
     db.session().add(t)
     db.session().commit()
 

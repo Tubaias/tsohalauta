@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<p>Statistics main page.</p>
+Currently there are {{ threadcount }} active threads.
+<hr>
+
+<h4 style="margin: 0px">10 most active threads:</h4>
+<small>(threads with no messages are not shown)</small>
+<ol>
+  {% for thread in top10_threads %}
+  <li>
+    <a href="{{ url_for('messages_index', thread=thread.id) }}">
+      [{{ thread.id }}] {{ thread.title }}
+    </a>
+    | Activity: {{thread.activity}} | Messages: {{thread.messages}}
+  </li>
+  {% endfor %}
+</ol>
+<hr>
+
+{% if current_user.is_authenticated %}
+  Actions taken on current moderator account: {{current_user.actions_taken}}
+{% endif %}
+
+{% endblock %}

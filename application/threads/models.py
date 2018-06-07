@@ -1,3 +1,5 @@
+from sqlalchemy.sql import text
+
 from application import db
 from application.models import Base
 
@@ -17,11 +19,18 @@ class Thread(Base):
         self.board_id = board
 
     @staticmethod
-    def find_threads_with_messages():
-        stmt = text("SELECT Thread.id, Thread.title, Thread.activity FROM Thread"
-                    " LEFT JOIN COUNT(Message) ON Message.thread_id = Thread.id"
+    def find_top10_threads():
+        stmt = text("SELECT Thread.id, Thread.title, Thread.activity AS activity, COUNT(Message.id) AS messages FROM Thread"
+                    " LEFT JOIN Message ON Message.thread_id = Thread.id"
                     " GROUP BY Thread.id"
-                    " ORDER BY Thread.activity"
-                    " HAVING COUNT(Message.id) > 0")
+                    " HAVING messages > 0"
+                    " ORDER BY activity DESC, messages DESC"
+                    " LIMIT 10")
 
         res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "title":row[1], "activity":row[2], "messages":row[3]})
+
+        return response
