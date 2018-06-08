@@ -1,15 +1,15 @@
-/* here for future use */
+body {
+    background-color: rgb(238, 245, 255);
+}
 
-body {background-color: rgb(247, 253, 255);}
-
-.mainheader {
-    background-color:rgb(210, 243, 243);
-    margin: 0px 0px 10px 0px
+.navbar-custom {
+    background-color: rgb(153, 197, 255);
 }
 
 .editbutton {
     background-color: rgb(175, 76, 76);
     color: white;
+    font-size: 12px;
     border: none;
 }
 
@@ -27,4 +27,20 @@ body {background-color: rgb(247, 253, 255);}
 
 .lesspaddedheader {
     margin: 10px 0px 10px 0px;
+}
+
+.anon-name {
+    color:teal;
+}
+
+.mod-name {
+    color:firebrick;
+}
+
+.thread-title {
+    color:blue;
+}
+
+.message-container {
+    background-color: rgb(215, 232, 255);
 }

@@ -1,65 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Lankku</title>
-    <style>
-      body {background-color: rgb(247, 253, 255);}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-      .mainheader {
-        background-color:rgb(210, 243, 243);
-        margin: 0px 0px 10px 0px
-      }
-
-      .editbutton {
-        background-color: rgb(175, 76, 76);
-        color: white;
-        border: none;
-      }
-
-      .navbutton {
-        background-color: rgb(110, 132, 255);
-        color: white;
-        border: none;
-        font-size: 16px;
-        margin: 0px 0px 10px 0px
-      }
-
-      .inlineform {
-        display: inline;
-      }
-
-      .lesspaddedheader {
-        margin: 10px 0px 10px 0px;
-      }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   </head>
 
   <body>
-    <div class=mainheader>
-      <form class=inlineform>
-        <button class=navbutton formaction="{{ url_for('index') }}">return to index</button>
-      </form>
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom mb-4">
+      <a class="navbar-brand" href="/">TsohaLankku</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('statistics_index') }} ">View statistics</a>
+          </li>
+        </ul>
+        <div class="form-inline mt-2 mt-md-0">
+          {% if current_user.is_authenticated %}
+            Logged in as {{ current_user.username }} |
+            <a href="{{ url_for('auth_logout') }}"><small>logout</small></a>
+          {% else %}
+            <p style="margin: 5px; color:white">moderator:</p>
+            <a href="{{ url_for('auth_login') }}"><small>login</small></a> 
+            <small style="margin: 5px">|</small>
+            <a href="{{ url_for('auth_register') }}"><small>register</small></a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
 
-      <form class=inlineform>
-        <button class=navbutton formaction="{{ url_for('statistics_index') }}">view statistics</button>
-      </form>
-      
-      {% if current_user.is_authenticated %}
-        Logged in as {{ current_user.username }} |
-        <a href="{{ url_for('auth_logout') }}"><small>logout</small></a>
-      {% else %}
-        moderator:
-        <a href="{{ url_for('auth_login') }}"><small>login</small></a> 
-        <small>|</small>
-        <a href="{{ url_for('auth_register') }}"><small>register</small></a>
-      {% endif %}
-    </div>
+    <main role="main" class="container-fluid">
+      {% block body %}
+      <p>
+        Quality content.
+      </p>
+      {% endblock %}
+    </main>
 
-    {% block body %}
-    <p>
-      quality content.
-    </p>
-    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -12,11 +12,11 @@
   {% endfor %}
 </ul>
 
-<b style="color:blue; font-size:15px;">{{ thread.title }}</b> |
+<b class=thread-title>{{ thread.title }}</b> |
 {% if thread.name == "Anonymous" %}
-  <b style="color:teal; font-size:15px;">{{ thread.name }}</b> |
+  <b class=anon-name>{{ thread.name }}</b> |
 {% else %}
-  <b style="color:firebrick; font-size:15px;">{{ thread.name }}</b> |
+  <b class=mod-name>{{ thread.name }}</b> |
 {% endif %}
 {{ thread.date_modified }} |
 Thread No. {{ thread.id }}
@@ -27,18 +27,18 @@ Thread No. {{ thread.id }}
   {% for message in messages %}
   <tr>
     <td>
-      <div style="background-color:rgb(210, 243, 243)">
+      <div class="container message-container">
         <form class=inlineform>
           <button class=editbutton formaction="{{ url_for('messages_single', message=message.id) }}">info</button>
         </form>
         {% if message.name == "Anonymous" %}
-          <b style="color:teal; font-size:15px;">{{ message.name }}</b> |
+          <b class=anon-name>{{ message.name }}</b> |
         {% else %}
-          <b style="color:firebrick; font-size:15px;">{{ message.name }}</b> |
+          <b class=mod-name>{{ message.name }}</b> |
         {% endif %}
         {{ message.date_modified}} |
         No. {{ message.id}}
-        <br><br>
+        <br style="margin: 3px">
         {{ message.text }}
       </div>
     </td>
