@@ -2,6 +2,7 @@ from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
 from application import app, db
+from application.messages.models import Message
 from application.threads.models import Thread
 from application.threads.forms import ThreadForm
 
@@ -23,6 +24,11 @@ def threads_create():
 
     if Thread.query.count() >= 20:
         least_active_thread = Thread.query.order_by(Thread.activity).first()
+        messages = Message.query.filter_by(thread_id=least_active_thread.id)
+
+        for m in messages:
+            db.session.delete(m)
+
         db.session.delete(least_active_thread)
 
     db.session().add(t)
