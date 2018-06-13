@@ -8,16 +8,25 @@ from application.threads.models import Thread
 
 @app.route("/t/<thread>/", methods=["GET"])
 def messages_index(thread):
-    return render_template("messages/list.html", messages = Message.query.filter_by(thread_id=thread), thread = Thread.query.get(thread), form = MessageForm())
+    form = MessageForm()
+    reply = request.args.get('reply')
+    
+    if reply != None:
+        form.set_reply(reply)
+
+    return render_template("messages/list.html", messages = Message.query.filter_by(thread_id=thread), thread = Thread.query.get(thread), form = form)
 
 @app.route("/t/<thread>/", methods=["POST"])
 def messages_create(thread):
     form = MessageForm(request.form)
-
+    print(form.target)
     if not form.validate():
         return render_template("messages/list.html", messages = Message.query.filter_by(thread_id=thread), thread = Thread.query.get(thread), form = form)
 
     m = Message(form.text.data, thread)
+
+    if form.target.data != None and form.target.data != "":
+        m.reply_target_id = int(form.target.data)
     
     if current_user.is_authenticated:
         m.moderator_id = current_user.id

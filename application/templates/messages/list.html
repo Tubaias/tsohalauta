@@ -2,16 +2,21 @@
   
 {% block body %}
 {% if current_user.is_authenticated %}
-<form method="POST" action="{{ url_for('threads_delete', thread=thread) }}">
-  <input type="submit" value="Delete thread"/>
+<form>
+  <button class=deletebutton formaction="{{ url_for('threads_delete', thread=thread) }}">Delete thread</button>
 </form>
-<hr>
+<hr style="padding: 5px; margin: 0px">
 {% endif %}
 
 <form method="POST" action="{{ url_for('messages_create', thread=thread.id) }}">
   {{ form.text }}
+  {{ form.target }}
   <input type="submit" value="Post message"/>
 </form>
+
+{% if form.target.data != None %}
+  <p style="padding: 2px">Replying to No. {{ form.target.data }}</p>
+{% endif %}
 
 <ul>
   {% for error in form.text.errors %}
@@ -25,7 +30,7 @@
 {% else %}
   <b class=mod-name>{{ thread.name }}</b> |
 {% endif %}
-{{ thread.date_modified }} |
+{{ thread.date_created }} |
 Thread No. {{ thread.id }}
 
 <p>{{ thread.text }}</p>
@@ -34,7 +39,7 @@ Thread No. {{ thread.id }}
   {% for message in messages %}
   <tr>
     <td>
-      <div class="container message-container">
+      <div id="{{ message.id }}" class="container message-container">
         <form class=inlineform>
           <button class=editbutton formaction="{{ url_for('messages_single', message=message.id) }}">info</button>
         </form>
@@ -44,8 +49,11 @@ Thread No. {{ thread.id }}
           <b class=mod-name>{{ message.name }}</b> |
         {% endif %}
         {{ message.date_modified}} |
-        No. {{ message.id}}
-        <br style="margin: 3px">
+        <a href="{{ url_for('messages_index', thread=thread.id, reply=message.id) }}">No. {{ message.id}}</a>
+        <br style="margin: 0px">
+        {% if message.reply_target_id != None %}
+        <a href="#{{ message.reply_target_id }}"> >>{{ message.reply_target_id }} </a>
+        {% endif %}
         <p class="message-text">{{ message.text }}</p>
       </div>
     </td>

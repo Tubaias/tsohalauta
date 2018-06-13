@@ -18,6 +18,14 @@ body {
     border: none;
 }
 
+.deletebutton {
+    background-color: rgb(175, 76, 76);
+    color: white;
+    border: none;
+    font-size: 16px;
+    margin: 0px 0px 10px 0px
+}
+
 .navbutton {
     background-color: rgb(110, 132, 255);
     color: white;
@@ -55,4 +63,8 @@ body {
     margin: 2px;
     width: 800px;
     overflow-wrap: break-word;
+}
+
+.message-active {
+    background: lightcoral;
 }
