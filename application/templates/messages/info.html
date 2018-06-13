@@ -17,6 +17,8 @@
 {{ message.date_modified }}
 <h4 class=lesspaddedheader>Message text</h4>
 {{ message.text }}
+
+{% if current_user.is_authenticated %}
 <hr>
 <h4 class=lesspaddedheader>New message text</h4>
 
@@ -35,4 +37,5 @@
 <form method="POST" action="{{ url_for('messages_delete', message=message) }}">
   <input type="submit" value="Delete message"/>
 </form>
+{% endif %}
 {% endblock %}

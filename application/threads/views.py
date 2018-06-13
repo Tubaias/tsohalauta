@@ -24,14 +24,21 @@ def threads_create():
 
     if Thread.query.count() >= 20:
         least_active_thread = Thread.query.order_by(Thread.activity).first()
-        messages = Message.query.filter_by(thread_id=least_active_thread.id)
-
-        for m in messages:
-            db.session.delete(m)
-
         db.session.delete(least_active_thread)
 
     db.session().add(t)
     db.session().commit()
 
     return redirect(url_for("messages_index", thread=t.id))
+
+@app.route("/t/<thread>/del", methods = ["POST"])
+@login_required
+def threads_delete(thread):
+    thread_num = int(thread[8:(len(thread) - 1)])
+
+    t = Thread.query.get(thread_num)
+    db.session.delete(t)
+    current_user.actions_taken += 1
+
+    db.session().commit()
+    return redirect(url_for("index"))

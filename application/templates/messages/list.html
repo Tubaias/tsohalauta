@@ -1,6 +1,13 @@
 {% extends "layout.html" %}
   
 {% block body %}
+{% if current_user.is_authenticated %}
+<form method="POST" action="{{ url_for('threads_delete', thread=thread) }}">
+  <input type="submit" value="Delete thread"/>
+</form>
+<hr>
+{% endif %}
+
 <form method="POST" action="{{ url_for('messages_create', thread=thread.id) }}">
   {{ form.text }}
   <input type="submit" value="Post message"/>
@@ -39,7 +46,7 @@ Thread No. {{ thread.id }}
         {{ message.date_modified}} |
         No. {{ message.id}}
         <br style="margin: 3px">
-        {{ message.text }}
+        <p class="message-text">{{ message.text }}</p>
       </div>
     </td>
   </tr>

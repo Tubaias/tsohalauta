@@ -23,10 +23,10 @@
         </ul>
         <div class="form-inline mt-2 mt-md-0">
           {% if current_user.is_authenticated %}
-            Logged in as {{ current_user.username }} |
+            <p class=navbartext>Logged in as {{ current_user.username }}</p>
             <a href="{{ url_for('auth_logout') }}"><small>logout</small></a>
           {% else %}
-            <p style="margin: 5px; color:white">moderator:</p>
+            <p class=navbartext>moderator:</p>
             <a href="{{ url_for('auth_login') }}"><small>login</small></a> 
             <small style="margin: 5px">|</small>
             <a href="{{ url_for('auth_register') }}"><small>register</small></a>
