@@ -50,7 +50,7 @@ Thread No. {{ thread.id }}
         {% endif %}
         {{ message.date_modified}} |
         <a href="{{ url_for('messages_index', thread=thread.id, reply=message.id) }}">No. {{ message.id}}</a>
-        <br style="margin: 0px">
+        <br style="margin: 1px">
         {% if message.reply_target_id != None %}
         <a href="#{{ message.reply_target_id }}"> >>{{ message.reply_target_id }} </a>
         {% endif %}
