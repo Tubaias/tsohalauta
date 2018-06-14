@@ -8,24 +8,28 @@
 <hr style="padding: 5px; margin: 0px">
 {% endif %}
 
-<form method="POST" action="{{ url_for('messages_create', thread=thread.id) }}">
-  {{ form.text }}
+<form class=inlineform method="POST" action="{{ url_for('messages_create', thread=thread.id) }}">
+  {{ form.text(rows=1, cols=70) }}
   {{ form.target }}
-  <input type="submit" value="Post message"/>
+  <br>
+  <input class=submitbutton type="submit" value="Post message"/>
 </form>
 
-{% if form.target.data != None %}
-  <p style="padding: 2px">Replying to No. {{ form.target.data }}</p>
-  <form class=inlineform>
-    <button class=editbutton formaction="{{ url_for('messages_index', thread=thread.id, reply=None) }}">info</button>
-  </form>
-{% endif %}
-
+{% if error in form.text.errors %}
 <ul>
   {% for error in form.text.errors %}
   <li>{{ error }}</li>
   {% endfor %}
 </ul>
+{% endif %}
+
+{% if form.target.data != None and form.target.data != "" %}
+  <p style="padding: 2px; display: inline">Replying to message No. {{ form.target.data }}</p>
+  <form class=inlineform style>
+    <button class=editbutton formaction="{{ url_for('messages_index', thread=thread.id, reply=None) }}">undo reply</button>
+  </form>
+{% endif %}
+<hr style="padding: 5px; margin: 0px">
 
 <b class=thread-title>{{ thread.title }}</b> |
 {% if thread.name == "Anonymous" %}
@@ -35,7 +39,6 @@
 {% endif %}
 {{ thread.date_created }} |
 Thread No. {{ thread.id }}
-
 <p>{{ thread.text }}</p>
 
 <table>
@@ -51,7 +54,10 @@ Thread No. {{ thread.id }}
         {% else %}
           <b class=mod-name>{{ message.name }}</b> |
         {% endif %}
-        {{ message.date_modified}} |
+        {{ message.date_modified}}
+        {% if message.date_modified != message.date_created %}
+        *
+        {% endif %} |
         <a href="{{ url_for('messages_index', thread=thread.id, reply=message.id) }}">No. {{ message.id}}</a>
         <br style="margin: 1px">
         {% if message.reply_target_id != None %}

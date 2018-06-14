@@ -14,7 +14,8 @@ def messages_index(thread):
     if reply != None:
         form.set_reply(reply)
 
-    return render_template("messages/list.html", messages = Message.query.filter_by(thread_id=thread), thread = Thread.query.get(thread), form = form)
+    return render_template("messages/list.html", messages = Message.query.filter_by(thread_id=thread).order_by(Message.id), 
+                            thread = Thread.query.get(thread), form = form)
 
 @app.route("/t/<thread>/", methods=["POST"])
 def messages_create(thread):

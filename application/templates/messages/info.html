@@ -23,8 +23,9 @@
 <h4 class=lesspaddedheader>New message text</h4>
 
 <form method="POST" action="{{ url_for('messages_edit', message=message.id) }}">
-  {{ form.text }}
-  <input type="submit" value="Edit message"/>
+  {{ form.text(rows=1, cols=70) }}
+  <br>
+  <input class=submitbutton type="submit" value="Edit message"/>
 </form>
 
 <ul>
@@ -35,7 +36,7 @@
 <hr>
 
 <form method="POST" action="{{ url_for('messages_delete', message=message.id) }}">
-  <input type="submit" value="Delete message"/>
+  <input class=deletebutton type="submit" value="Delete message"/>
 </form>
 {% endif %}
 {% endblock %}
