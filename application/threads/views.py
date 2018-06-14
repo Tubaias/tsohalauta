@@ -31,12 +31,10 @@ def threads_create():
 
     return redirect(url_for("messages_index", thread=t.id))
 
-@app.route("/t/<thread>/del", methods = ["POST"])
+@app.route("/t/<thread>/del", methods = ["GET", "POST"])
 @login_required
 def threads_delete(thread):
-    thread_num = int(thread[8:(len(thread) - 1)])
-
-    t = Thread.query.get(thread_num)
+    t = Thread.query.get(thread)
     db.session.delete(t)
     current_user.actions_taken += 1
 

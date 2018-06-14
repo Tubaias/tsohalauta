@@ -54,17 +54,16 @@ def messages_single(message):
 @app.route("/m/<message>/", methods=["POST"])
 @login_required
 def messages_edit(message):
-    message_num = int(message[9:(len(message) - 1)])
-    thread_id = Message.query.get(message_num).thread_id
-    m = Message.query.get(message_num)
+    m = Message.query.get(message)
 
     if m is None:
-        return redirect(url_for("messages_index", thread=thread_id))
-        
+        return redirect(url_for("index"))
+
+    thread_id = m.thread_id
     form = MessageForm(request.form)
 
     if not form.validate():
-        return render_template("messages/info.html", message = Message.query.get(message_num), thread = thread_id, form = form)
+        return render_template("messages/info.html", message = Message.query.get(message), thread = thread_id, form = form)
 
     m.text = form.text.data
     current_user.actions_taken += 1
@@ -75,13 +74,12 @@ def messages_edit(message):
 @app.route("/m/<message>/delete", methods=["POST"])
 @login_required
 def messages_delete(message):
-    message_num = int(message[9:(len(message) - 1)])
-    thread_id = Message.query.get(message_num).thread_id
-    m = Message.query.get(message_num)
+    m = Message.query.get(message)
 
     if m is None:
-        return redirect(url_for("messages_index", thread=thread_id))
+        return redirect(url_for("index"))
 
+    thread_id = m.thread_id
     threads = Thread.query.all()
 
     for t in threads:

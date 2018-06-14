@@ -3,7 +3,7 @@
 {% block body %}
 {% if current_user.is_authenticated %}
 <form>
-  <button class=deletebutton formaction="{{ url_for('threads_delete', thread=thread) }}">Delete thread</button>
+  <button class=deletebutton formaction="{{ url_for('threads_delete', thread=thread.id) }}">Delete thread</button>
 </form>
 <hr style="padding: 5px; margin: 0px">
 {% endif %}
@@ -16,6 +16,9 @@
 
 {% if form.target.data != None %}
   <p style="padding: 2px">Replying to No. {{ form.target.data }}</p>
+  <form class=inlineform>
+    <button class=editbutton formaction="{{ url_for('messages_index', thread=thread.id, reply=None) }}">info</button>
+  </form>
 {% endif %}
 
 <ul>
