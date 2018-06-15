@@ -6,21 +6,22 @@ from application.messages.models import Message
 from application.threads.models import Thread
 from application.threads.forms import ThreadForm
 
-@app.route("/thread/new", methods = ["GET", "POST"])
-def threads_create():
+@app.route("/<board>/new", methods = ["GET", "POST"])
+def threads_create(board):
     if request.method == "GET":
-        return render_template("threads/threadform.html", form = ThreadForm())
+        return render_template("threads/threadform.html", form = ThreadForm(), board = board)
 
     form = ThreadForm(request.form)
 
     if not form.validate():
-        return render_template("threads/threadform.html", form = form)
+        return render_template("threads/threadform.html", form = form, board = board)
 
-    t = Thread(form.title.data, form.text.data, 1)
+    t = Thread(form.title.data, form.text.data, board)
 
     if current_user.is_authenticated:
         t.moderator_id = current_user.id
         t.name = current_user.username
+        current_user.actions_taken += 1
 
     if Thread.query.count() >= 20:
         least_active_thread = Thread.query.order_by(Thread.activity).first()

@@ -7,21 +7,16 @@
 
 <table>
   <tr>
-    <th>Current threads</th>
+    <th>Available boards</th>
   </tr>
-  {% for thread in threads %}
+  {% for board in boards %}
   <tr>
     <td>
-      <a href="{{ url_for('messages_index', thread=thread.id) }}">
-        [{{ thread.id }}] {{ thread.title }}
+      <a href="{{ url_for('boards_index', board=board.id) }}">
+        [{{ board.id }}] {{ board.tag }}
       </a>
     </td>
   </tr>
   {% endfor %}
 </table>
-<hr>
-
-<form>
-  <button class=navbutton formaction="{{ url_for('threads_create') }}">Create a new thread</button>
-</form>
 {% endblock %}

@@ -1,8 +1,8 @@
 from flask import render_template
+
 from application import app
-from application.messages.models import Message
-from application.threads.models import Thread
+from application.boards.models import Board
 
 @app.route("/")
 def index():
-    return render_template("index.html", threads = Thread.query.all())
+    return render_template("index.html", boards = Board.query.all())

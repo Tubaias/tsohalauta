@@ -15,13 +15,9 @@
   <input class=submitbutton type="submit" value="Post message"/>
 </form>
 
-{% if error in form.text.errors %}
-<ul>
-  {% for error in form.text.errors %}
-  <li>{{ error }}</li>
-  {% endfor %}
-</ul>
-{% endif %}
+{% for error in form.text.errors %}
+  <p style="color:firebrick">Text: {{ error }}</p>
+{% endfor %}
 
 {% if form.target.data != None and form.target.data != "" %}
   <p style="padding: 2px; display: inline">Replying to message No. {{ form.target.data }}</p>

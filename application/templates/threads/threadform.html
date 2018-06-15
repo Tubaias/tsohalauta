@@ -9,7 +9,7 @@
 {% endfor %}
 <p style="color:firebrick">{{ error }}</p>
 
-<form method="POST" action="{{ url_for('threads_create') }}">
+<form method="POST" action="{{ url_for('threads_create', board=board) }}">
   <table>
     <tr>
       <td>

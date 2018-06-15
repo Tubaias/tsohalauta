@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h3>
+  /{{ board.tag }}/
+</h3>
+
+<table>
+  <tr>
+    <th>Current threads</th>
+  </tr>
+  {% for thread in threads %}
+  <tr>
+    <td>
+      <a href="{{ url_for('messages_index', thread=thread.id) }}">
+        [{{ thread.id }}] {{ thread.title }}
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<hr>
+
+<form>
+  <button class=navbutton method="GET" formaction="{{ url_for('threads_create', board=board.id) }}">Create a new thread</button>
+</form>
+{% endblock %}

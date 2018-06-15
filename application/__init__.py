@@ -23,6 +23,9 @@ from application.messages import views
 from application.threads import models
 from application.threads import views
 
+from application.boards import models
+from application.boards import views
+
 from application.auth import models
 from application.auth import views
 

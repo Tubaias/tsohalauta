@@ -8,7 +8,7 @@ class Thread(Base):
     title = db.Column(db.String(144))
     text = db.Column(db.String(1000), nullable=False)
     activity = db.Column(db.Integer, default=100)
-    board_id = db.Column(db.Integer, nullable=False)
+    board_id = db.Column(db.Integer, db.ForeignKey('board.id'), nullable=False)
     moderator_id = db.Column(db.Integer, db.ForeignKey('moderator.id'), default=None)
 
     messages = db.relationship("Message", cascade="delete", lazy=True)
