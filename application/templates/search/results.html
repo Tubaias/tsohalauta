@@ -2,22 +2,28 @@
 
 {% block body %}
 
-<h4>Threads with matching title: </h4>
-{% for t in threads_title %}
+{% if threads_title %}
+  <h4>Threads with matching title: </h4>
+  {% for t in threads_title %}
     {{ t.title }}
-{% endfor %}
-<hr>
+  {% endfor %}
+  <hr>
+{% endif %}
 
-<h4>Threads with matching text: </h4>
-{% for t in threads_text %}
+{% if threads_text %}
+  <h4>Threads with matching text: </h4>
+  {% for t in threads_text %}
     {{ t.title }}
-{% endfor %}
-<hr>
+  {% endfor %}
+  <hr>
+{% endif %}
 
-<h4>Messages with matching text: </h4>
-{% for message in messages %}
+{% if messages %}
+  <h4>Messages with matching text: </h4>
+  {% for message in messages %}
     {{ message.text }}
     <br>
-{% endfor %}
+  {% endfor %}
+{% endif %}
 
 {% endblock %}
