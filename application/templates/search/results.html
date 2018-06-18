@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h4>Threads with matching title: </h4>
+{% for t in threads_title %}
+    {{ t.title }}
+{% endfor %}
+<hr>
+
+<h4>Threads with matching text: </h4>
+{% for t in threads_text %}
+    {{ t.title }}
+{% endfor %}
+<hr>
+
+<h4>Messages with matching text: </h4>
+{% for message in messages %}
+    {{ message.text }}
+    <br>
+{% endfor %}
+
+{% endblock %}

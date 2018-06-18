@@ -22,6 +22,16 @@
           </li>
         </ul>
         <div class="form-inline mt-2 mt-md-0">
+          <form action="{{ url_for('search_execute') }}" method="POST">
+            <select name="source">
+              <option value="all">all</option>
+              <option value="threads">threads</option>
+              <option value="messages">messages</option>
+            </select>
+            <input type="text" name="search">
+            <input type="submit" value="Search">
+          </form>
+
           {% if current_user.is_authenticated %}
             <p class=navbartext>Logged in as {{ current_user.username }}</p>
             <a href="{{ url_for('auth_logout') }}"><small>logout</small></a>

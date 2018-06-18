@@ -30,6 +30,7 @@ from application.auth import models
 from application.auth import views
 
 from application.statistics import views
+from application.search import views
 
 # login
 from application.auth.models import User
