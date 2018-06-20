@@ -46,13 +46,13 @@ def messages_create(thread):
   
     return redirect(url_for("messages_index", thread=thread))
 
-@app.route("/m/<message>/", methods=["GET"])
-def messages_single(message):
+@app.route("/m/<message>/info", methods=["GET"])
+def messages_info(message):
     thread_id = Message.query.get(message).thread_id
 
     return render_template("messages/info.html", message = Message.query.get(message), thread = thread_id, form = MessageForm())
 
-@app.route("/m/<message>/", methods=["POST"])
+@app.route("/m/<message>/info", methods=["POST"])
 @login_required
 def messages_edit(message):
     m = Message.query.get(message)

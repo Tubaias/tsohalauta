@@ -23,14 +23,15 @@
         </ul>
         <div class="form-inline mt-2 mt-md-0">
           <form action="{{ url_for('search_execute') }}" method="POST">
-            <select name="source">
+            <select style="font-size: 14px" name="source">
               <option value="all">all</option>
               <option value="threads">threads</option>
               <option value="messages">messages</option>
             </select>
             <input type="text" name="search">
-            <input type="submit" value="Search">
+            <input class=navbutton style="font-size: 18px" type="submit" value="Search">
           </form>
+          <p class=whitespace></p>
 
           {% if current_user.is_authenticated %}
             <p class=navbartext>Logged in as {{ current_user.username }}</p>

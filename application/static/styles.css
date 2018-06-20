@@ -2,6 +2,11 @@ body {
     background-color: rgb(238, 245, 255);
 }
 
+.whitespace { 
+    display:inline-block; 
+    margin-left: 20px; 
+}
+
 .navbar-custom {
     background-color: rgb(153, 197, 255);
 }

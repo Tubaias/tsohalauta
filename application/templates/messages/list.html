@@ -43,7 +43,7 @@ Thread No. {{ thread.id }}
     <td>
       <div id="{{ message.id }}" class="container message-container">
         <form class=inlineform>
-          <button class=editbutton formaction="{{ url_for('messages_single', message=message.id) }}">info</button>
+          <button class=editbutton formaction="{{ url_for('messages_info', message=message.id) }}">info</button>
         </form>
         {% if message.name == "Anonymous" %}
           <b class=anon-name>{{ message.name }}</b> |

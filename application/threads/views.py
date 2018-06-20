@@ -32,6 +32,10 @@ def threads_create(board):
 
     return redirect(url_for("messages_index", thread=t.id))
 
+@app.route("/t/<thread>/info", methods = ["GET"])
+def threads_info(thread):
+    return redirect(url_for("index"))
+
 @app.route("/t/<thread>/del", methods = ["GET", "POST"])
 @login_required
 def threads_delete(thread):

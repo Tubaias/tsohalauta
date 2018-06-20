@@ -2,28 +2,99 @@
 
 {% block body %}
 
+{% if not threads_title and not threads_text and not messages %}
+  <h4>No results found.</h4>
+{% endif %}
+
 {% if threads_title %}
   <h4>Threads with matching title: </h4>
+  <table>
   {% for t in threads_title %}
-    {{ t.title }}
+    <tr>
+      <td>
+        <div class="container message-container">
+          <form class=inlineform>
+            <button class=editbutton formaction="{{ url_for('threads_info', thread=t.id) }}">info</button>
+          </form>
+          <a href="{{ url_for('messages_index', thread=t.id) }}">
+            [{{ t.id }}] {{ t.title }}
+          </a> |
+          {% if t.name == "Anonymous" %}
+          <b class=anon-name>{{ t.name }}</b> |
+          {% else %}
+          <b class=mod-name>{{ t.name }}</b> |
+          {% endif %}
+          {{ t.date_created }} |
+          Thread No. {{ t.id }}
+          <p class="message-text">{{ t.text }}</p>
+        </div>
+      </td>
+    </tr>
   {% endfor %}
+  </table>
   <hr>
 {% endif %}
 
 {% if threads_text %}
   <h4>Threads with matching text: </h4>
+  <table>
   {% for t in threads_text %}
-    {{ t.title }}
+    <tr>
+      <td>
+        <div class="container message-container">
+          <form class=inlineform>
+            <button class=editbutton formaction="{{ url_for('threads_info', thread=t.id) }}">info</button>
+          </form>
+          <a href="{{ url_for('messages_index', thread=t.id) }}">
+            [{{ t.id }}] {{ t.title }}
+          </a> |
+          {% if t.name == "Anonymous" %}
+          <b class=anon-name>{{ t.name }}</b> |
+          {% else %}
+          <b class=mod-name>{{ t.name }}</b> |
+          {% endif %}
+          {{ t.date_created }} |
+          Thread No. {{ t.id }}
+          <p class="message-text">{{ t.text }}</p>
+        </div>
+      </td>
+    </tr>
   {% endfor %}
+  </table>
   <hr>
 {% endif %}
 
 {% if messages %}
   <h4>Messages with matching text: </h4>
+  <table>
   {% for message in messages %}
-    {{ message.text }}
-    <br>
+    <tr>
+      <td>
+        <div id="{{ message.id }}" class="container message-container">
+          <form class=inlineform>
+            <button class=editbutton formaction="{{ url_for('messages_info', message=message.id) }}">info</button>
+          </form>
+          {% if message.name == "Anonymous" %}
+            <b class=anon-name>{{ message.name }}</b> |
+          {% else %}
+            <b class=mod-name>{{ message.name }}</b> |
+          {% endif %}
+          {{ message.date_modified }}
+          {% if message.date_modified != message.date_created %}
+          *
+          {% endif %} |
+          No. {{ message.id }}
+          <a href="{{ url_for('messages_index', thread=message.thread_id) }}">(go to thread)</a>
+          <br style="margin: 1px">
+          {% if message.reply_target_id != None %}
+          <a href="#{{ message.reply_target_id }}"> >>{{ message.reply_target_id }} </a>
+          {% endif %}
+          <p class="message-text">{{ message.text }}</p>
+        </div>
+      </td>
+    </tr>
   {% endfor %}
+  </table>
 {% endif %}
 
 {% endblock %}
