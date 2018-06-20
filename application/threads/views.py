@@ -22,8 +22,8 @@ def threads_create(board):
         t.name = current_user.username
         current_user.actions_taken += 1
 
-    if Thread.query.count() >= 20:
-        least_active_thread = Thread.query.order_by(Thread.activity).first()
+    if Thread.query.filter_by(board_id=board).count() >= 20:
+        least_active_thread = Thread.query.filter_by(board_id=board).order_by(Thread.activity).first()
         db.session.delete(least_active_thread)
 
     db.session().add(t)

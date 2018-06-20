@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<p>
-  Index page!
-</p>
+
+<h1>TsohaLankku</h1>
+<i>A chan-like pseudo-anonymous messageboard for spam and other post-ironic post-content.</i>
+<hr>
 
 <table>
   <tr>
@@ -12,8 +13,8 @@
   {% for board in boards %}
   <tr>
     <td>
-      <a href="{{ url_for('boards_index', board=board.id) }}">
-        [{{ board.id }}] {{ board.tag }}
+      <a style="font-size: 30px" href="{{ url_for('boards_index', board=board.id) }}">
+        /{{ board.tag }}/
       </a>
     </td>
   </tr>
