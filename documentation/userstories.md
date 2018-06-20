@@ -6,13 +6,13 @@ Käyttäjänä voin...
 - selata laudalla olevia lankoja otsikon perusteella.
 - lukea langoissa olevia viestejä ja kirjoittaa lankoihin uusia viestejä, jotka voivat viitata muihin viesteihin.
 - hakea lankoja tai viestejä hakutekstin perusteella ja tarkastella haun tuloksia.
-- tarkastella foorumilla olevien lankojen lukumäärää ja jokaisessa langassa olevien viestien lukumäärää.
+- tarkastella foorumilla olevien lankojen lukumäärää ja jokaisessa langassa olevien viestien lukumäärää. **(tilastot TODO)**
 
 ## Järjestelmänvalvoja
 Järjestelmänvalvojana voin...
 - kirjautua järjestelmänvalvojatilille.
 - selata laudalla olevia lankoja otsikon perusteella.
 - lukea langoissa olevia viestejä ja kirjoittaa lankoihin järjestelmänvalvojatilin nimellä varustettuja viestejä.
-- luoda superviestejä, jotka näkyvät jokaisessa sillä hetkellä olemassaolevassa langassa.
+- luoda superviestejä, jotka näkyvät jokaisessa sillä hetkellä olemassaolevassa langassa. **(TODO)**
 - muokata tai poistaa lankoja ja viestejä.
-- tarkastella foorumilla olevien lankojen lukumäärää ja jokaisessa langassa olevien viestien lukumäärää.
+- tarkastella foorumilla olevien lankojen lukumäärää ja jokaisessa langassa olevien viestien lukumäärää. **(tilastot TODO)**
