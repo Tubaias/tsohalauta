@@ -2,7 +2,6 @@ from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
 from application import app, db
-from application.messages.models import Message
 from application.threads.models import Thread
 from application.threads.forms import ThreadForm
 
@@ -34,14 +33,36 @@ def threads_create(board):
 
 @app.route("/t/<thread>/info", methods = ["GET"])
 def threads_info(thread):
-    return redirect(url_for("index"))
+    return render_template("threads/info.html", thread = Thread.query.get(thread), form = ThreadForm())
+
+@app.route("/t/<thread>/info", methods=["POST"])
+@login_required
+def threads_edit(thread):
+    t = Thread.query.get(thread)
+
+    if t is None:
+        return redirect(url_for("index"))
+
+    board_id = t.board_id
+    form = ThreadForm(request.form)
+
+    if not form.validate():
+        return render_template("threads/info.html", thread = t, form = form)
+
+    t.title = form.title.data
+    t.text = form.text.data
+    current_user.actions_taken += 1
+    db.session.commit()
+
+    return redirect(url_for("boards_index", board=board_id))
 
 @app.route("/t/<thread>/del", methods = ["GET", "POST"])
 @login_required
 def threads_delete(thread):
     t = Thread.query.get(thread)
+    board = t.board_id
     db.session.delete(t)
     current_user.actions_taken += 1
 
     db.session().commit()
-    return redirect(url_for("index"))
+    return redirect(url_for("boards_index", board=board))

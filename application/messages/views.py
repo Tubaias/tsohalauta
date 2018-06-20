@@ -48,9 +48,7 @@ def messages_create(thread):
 
 @app.route("/m/<message>/info", methods=["GET"])
 def messages_info(message):
-    thread_id = Message.query.get(message).thread_id
-
-    return render_template("messages/info.html", message = Message.query.get(message), thread = thread_id, form = MessageForm())
+    return render_template("messages/info.html", message = Message.query.get(message), form = MessageForm())
 
 @app.route("/m/<message>/info", methods=["POST"])
 @login_required
@@ -64,7 +62,7 @@ def messages_edit(message):
     form = MessageForm(request.form)
 
     if not form.validate():
-        return render_template("messages/info.html", message = Message.query.get(message), thread = thread_id, form = form)
+        return render_template("messages/info.html", message = m, thread = thread_id, form = form)
 
     m.text = form.text.data
     current_user.actions_taken += 1

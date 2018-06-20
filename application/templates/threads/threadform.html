@@ -13,25 +13,25 @@
   <table>
     <tr>
       <td>
-	{{ form.title.label }}
+	      {{ form.title.label }}
       </td>
       <td>
-	{{ form.title }}
+	      {{ form.title }}
       </td>
     </tr>
 
     <tr>
       <td>
-	{{ form.text.label }}
+	      {{ form.text.label }}
       </td>
       <td>
-	{{ form.text }}
+	      {{ form.text(rows=1, cols=70) }}
       </td>
     </tr>
     
     <tr>
       <td colspan="2">
-	<input type="submit" value="Create thread"/>
+	      <input type="submit" value="Create thread"/>
       </td>
     </tr>
 </form>

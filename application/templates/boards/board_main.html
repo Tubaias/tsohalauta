@@ -7,16 +7,28 @@
 
 <table>
   <tr>
-    <th>Current threads</th>
+    <th>Current threads:</th>
   </tr>
   {% for thread in threads %}
-  <tr>
-    <td>
-      <a href="{{ url_for('messages_index', thread=thread.id) }}">
-        [{{ thread.id }}] {{ thread.title }}
-      </a>
-    </td>
-  </tr>
+    <tr>
+      <td>
+        <div class="container message-container">
+          <form class=inlineform>
+            <button class=threadbutton formaction="{{ url_for('messages_index', thread=thread.id) }}">> to thread</button>
+          </form>
+          <b class=thread-title>{{ thread.title }}</b> |
+          {% if thread.name == "Anonymous" %}
+          <b class=anon-name>{{ thread.name }}</b> |
+          {% else %}
+          <b class=mod-name>{{ thread.name }}</b> |
+          {% endif %}
+          {{ thread.date_created }} |
+          Thread No. {{ thread.id }}
+          
+          <p class="message-text">{{ thread.text }}</p>
+        </div>
+      </td>
+    </tr>
   {% endfor %}
 </table>
 <hr>

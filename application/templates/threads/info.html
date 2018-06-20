@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form>
+  <button class=navbutton formaction="{{ url_for('messages_index', thread=thread.id) }}">return to thread</button>
+</form>
+
+<h4 class=lesspaddedheader>Moderator ID</h4> 
+{{ thread.moderator_id }}
+<h4 class=lesspaddedheader>Poster name</h4> 
+{{ thread.name }}
+<h4 class=lesspaddedheader>Thread ID</h4> 
+{{ thread.id }}
+<h4 class=lesspaddedheader>Date created</h4> 
+{{ thread.date_created }}
+<h4 class=lesspaddedheader>Date modified</h4> 
+{{ thread.date_modified }}
+<h4 class=lesspaddedheader>Thread title</h4>
+{{ thread.title }}
+<h4 class=lesspaddedheader>Thread text</h4>
+{{ thread.text }}
+
+{% if current_user.is_authenticated %}
+<hr>
+<h4 class=lesspaddedheader>New thread title and text</h4>
+
+<form method="POST" action="{{ url_for('threads_edit', thread=thread.id) }}">
+  {{ form.title.label }}
+  {{ form.title }}
+  <br>
+  {{ form.text.label }}
+  {{ form.text(rows=1, cols=70) }}
+  <br>
+  <input class=submitbutton type="submit" value="Edit thread"/>
+</form>
+
+<ul>
+  {% for error in form.text.errors %}
+  <li>{{ error }}</li>
+  {% endfor %}
+</ul>
+<hr>
+
+<form method="POST" action="{{ url_for('threads_delete', thread=thread.id) }}">
+  <input class=deletebutton type="submit" value="Delete thread"/>
+</form>
+{% endif %}
+{% endblock %}

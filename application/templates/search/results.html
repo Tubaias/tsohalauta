@@ -14,11 +14,9 @@
       <td>
         <div class="container message-container">
           <form class=inlineform>
-            <button class=editbutton formaction="{{ url_for('threads_info', thread=t.id) }}">info</button>
+            <button class=threadbutton formaction="{{ url_for('messages_index', thread=t.id) }}">> to thread</button>
           </form>
-          <a href="{{ url_for('messages_index', thread=t.id) }}">
-            [{{ t.id }}] {{ t.title }}
-          </a> |
+          <b class=thread-title>{{ t.title }}</b> |
           {% if t.name == "Anonymous" %}
           <b class=anon-name>{{ t.name }}</b> |
           {% else %}
@@ -43,11 +41,9 @@
       <td>
         <div class="container message-container">
           <form class=inlineform>
-            <button class=editbutton formaction="{{ url_for('threads_info', thread=t.id) }}">info</button>
+            <button class=threadbutton formaction="{{ url_for('messages_index', thread=t.id) }}">> to thread</button>
           </form>
-          <a href="{{ url_for('messages_index', thread=t.id) }}">
-            [{{ t.id }}] {{ t.title }}
-          </a> |
+          <b class=thread-title>{{ t.title }}</b> |
           {% if t.name == "Anonymous" %}
           <b class=anon-name>{{ t.name }}</b> |
           {% else %}
@@ -74,6 +70,9 @@
           <form class=inlineform>
             <button class=editbutton formaction="{{ url_for('messages_info', message=message.id) }}">info</button>
           </form>
+          <form class=inlineform>
+            <button class=threadbutton style="font-size: 12px" formaction="{{ url_for('messages_index', thread=message.thread_id) }}">> to thread</button>
+          </form>
           {% if message.name == "Anonymous" %}
             <b class=anon-name>{{ message.name }}</b> |
           {% else %}
@@ -84,7 +83,6 @@
           *
           {% endif %} |
           No. {{ message.id }}
-          <a href="{{ url_for('messages_index', thread=message.thread_id) }}">(go to thread)</a>
           <br style="margin: 1px">
           {% if message.reply_target_id != None %}
           <a href="#{{ message.reply_target_id }}"> >>{{ message.reply_target_id }} </a>

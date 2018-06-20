@@ -17,13 +17,23 @@ body {
 }
 
 .editbutton {
+    cursor: pointer;
     background-color: rgb(175, 76, 76);
     color: white;
     font-size: 12px;
     border: none;
 }
 
+.threadbutton {
+    cursor: pointer;
+    background-color: rgb(110, 132, 255);
+    color: white;
+    font-size: 14px;
+    border: none;
+}
+
 .deletebutton {
+    cursor: pointer;
     background-color: rgb(175, 76, 76);
     color: white;
     border: none;
@@ -32,6 +42,7 @@ body {
 }
 
 .navbutton {
+    cursor: pointer;
     background-color: rgb(110, 132, 255);
     color: white;
     border: none;
@@ -40,6 +51,7 @@ body {
 }
 
 .submitbutton {
+    cursor: pointer;
     background-color: rgb(110, 132, 255);
     color: white;
     border: none;

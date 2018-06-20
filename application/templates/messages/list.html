@@ -3,9 +3,15 @@
 {% block body %}
 {% if current_user.is_authenticated %}
 <form>
+  <button class=deletebutton formaction="{{ url_for('threads_info', thread=thread.id) }}">Edit thread</button>
+</form>
+<form>
   <button class=deletebutton formaction="{{ url_for('threads_delete', thread=thread.id) }}">Delete thread</button>
 </form>
-<hr style="padding: 5px; margin: 0px">
+{% else %}
+<form>
+  <button class=deletebutton formaction="{{ url_for('threads_info', thread=thread.id) }}">Thread info</button>
+</form>
 {% endif %}
 
 <form class=inlineform method="POST" action="{{ url_for('messages_create', thread=thread.id) }}">
@@ -43,7 +49,13 @@ Thread No. {{ thread.id }}
     <td>
       <div id="{{ message.id }}" class="container message-container">
         <form class=inlineform>
-          <button class=editbutton formaction="{{ url_for('messages_info', message=message.id) }}">info</button>
+          <button class=editbutton formaction="{{ url_for('messages_info', message=message.id) }}">
+              {% if current_user.is_authenticated %}
+                info/edit
+              {% else %}
+                info
+              {% endif %}
+          </button>
         </form>
         {% if message.name == "Anonymous" %}
           <b class=anon-name>{{ message.name }}</b> |
