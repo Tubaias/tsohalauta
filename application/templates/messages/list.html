@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
   
 {% block body %}
+<form>
+  <button class=navbutton formaction="{{ url_for('boards_index', board=thread.board_id) }}">return to board</button>
+</form>
+
 {% if current_user.is_authenticated %}
 <form>
   <button class=deletebutton formaction="{{ url_for('threads_info', thread=thread.id) }}">Edit thread</button>

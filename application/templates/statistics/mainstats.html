@@ -2,8 +2,15 @@
 
 {% block body %}
 
-<p>Statistics main page.</p>
+<h1>Statistics</h1>
+
 Currently there are {{ threadcount }} active threads across all boards.
+
+{% if current_user.is_authenticated %}
+  <br>
+  <b>Actions taken on current moderator account:</b> 
+  {{current_user.actions_taken}}
+{% endif %}
 <hr>
 
 <h4 style="margin: 0px">10 most active threads:</h4>
@@ -20,8 +27,13 @@ Currently there are {{ threadcount }} active threads across all boards.
 </ol>
 <hr>
 
-{% if current_user.is_authenticated %}
-  Actions taken on current moderator account: {{current_user.actions_taken}}
-{% endif %}
+<h4 style="margin: 0px">Total activity per board:</h4>
+<ol>
+  {% for board in boards_by_activity %}
+  <li>
+    <a style="font-size: 24px;" href="{{ url_for('boards_index', board=board.id) }}">/{{ board.tag }}/</a> | Activity: {{ board.activity }}
+  </li>
+  {% endfor %}
+</ol>
 
 {% endblock %}
