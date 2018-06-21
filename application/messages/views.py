@@ -8,21 +8,27 @@ from application.threads.models import Thread
 
 @app.route("/t/<thread>/", methods=["GET"])
 def messages_index(thread):
+    messages = Message.query.filter_by(thread_id=thread).order_by(Message.id)
     form = MessageForm()
     reply = request.args.get('reply')
     
     if reply != None:
         form.set_reply(reply)
 
-    return render_template("messages/list.html", messages = Message.query.filter_by(thread_id=thread).order_by(Message.id), 
-                            thread = Thread.query.get(thread), form = form)
+    return render_template("messages/list.html", messages = messages, thread = Thread.query.get(thread), form = form)
 
 @app.route("/t/<thread>/", methods=["POST"])
 def messages_create(thread):
+    thread_object = Thread.query.get(thread)
+
     form = MessageForm(request.form)
-    print(form.target)
     if not form.validate():
-        return render_template("messages/list.html", messages = Message.query.filter_by(thread_id=thread), thread = Thread.query.get(thread), form = form)
+        return render_template("messages/list.html", messages = Message.query.filter_by(thread_id=thread).order_by(Message.id), thread = thread_object, form = form)
+    
+    messagecount = len(thread_object.messages)
+    if messagecount >= 100:
+        return render_template("messages/list.html", messages = Message.query.filter_by(thread_id=thread).order_by(Message.id), thread = thread_object,
+                                form = form, toomanymessages = "Cannot post message, this thread is over the message limit.")
 
     m = Message(form.text.data, thread)
 

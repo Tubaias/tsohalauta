@@ -21,6 +21,10 @@
   <input class=submitbutton type="submit" value="Post message"/>
 </form>
 
+{% if toomanymessages %}
+  <p style="color:firebrick">{{ toomanymessages }}</p>
+{% endif %}
+
 {% for error in form.text.errors %}
   <p style="color:firebrick">Text: {{ error }}</p>
 {% endfor %}
