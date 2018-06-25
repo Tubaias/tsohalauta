@@ -1,5 +1,7 @@
 # User storyt
 
+Tärkeimmät user storyt eli käyttäjätarinat ja niihin liittyvät SQL-kyselyt.
+
 ## Peruskäyttäjä
 Käyttäjänä voin...
 - luoda uuden langan, jolla on otsikko ja jonkinlainen aloitusviesti.
@@ -29,7 +31,8 @@ WHERE ? = "threadsupermessage".thread_id AND supermessage.id = "threadsupermessa
 ```
 
 ```SQL
-SELECT message.id, message.date_created, message.date_modified, message.name, message.text, message.thread_id, message.moderator_id, message.reply_target_id
+SELECT message.id, message.date_created, message.date_modified, message.name, message.text, 
+message.thread_id, message.moderator_id, message.reply_target_id
 FROM message 
 WHERE message.thread_id = ? ORDER BY message.id
 ```
@@ -88,7 +91,52 @@ ORDER BY activity DESC
 
 ## Järjestelmänvalvoja
 Järjestelmänvalvojana voin lisäksi...
+
+- kirjautua järjestelmänvalvojatilille.
+
+```SQL
+SELECT moderator.id, moderator.date_created, moderator.date_modified, moderator.username,
+moderator.password, moderator.actions_taken
+FROM moderator 
+WHERE moderator.username = ? 
+AND moderator.password = ?
+```
+
 - kirjoittaa lankoihin järjestelmänvalvojatilin nimellä varustettuja viestejä.
+
+```SQL
+INSERT INTO message (date_created, date_modified, name, text, thread_id, moderator_id, reply_target_id) 
+VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?)
+```
+
 - kirjoittaa pastoille superviestejä, jotka näkyvät jokaisessa senhetkisessä langassa.
+
+```SQL
+INSERT INTO supermessage (date_created, date_modified, name, text, moderator_id) 
+VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?)
+```
+
+```SQL
+INSERT INTO "ThreadSuperMessage" (thread_id, supermessage_id) VALUES (?, ?)
+```
+
 - muokata tai poistaa viestejä.
+
+```SQL
+UPDATE message SET date_modified=CURRENT_TIMESTAMP, text=? WHERE message.id = ?
+```
+
+```SQL
+DELETE FROM message WHERE message.id = ?
+```
+
 - muokata tai poistaa lankoja.
+
+```SQL
+UPDATE thread SET date_modified=CURRENT_TIMESTAMP, title=?, text=? WHERE thread.id = ?
+```
+
+
+```SQL
+DELETE FROM thread WHERE thread.id = ?
+```
