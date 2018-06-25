@@ -1,6 +1,6 @@
 # Tsohalauta
 
-Tietokantasovellusharjoitus-kurssia varten toteutettu, yleistä lauta/chan-formaattia löysästi noudattava anonyymi keskustelufoorumi.  
+Tietokantasovellusharjoitus-kurssia varten Pythonin ja Flaskin avulla toteutettu, yleistä lauta/chan-formaattia löysästi noudattava anonyymi keskustelufoorumi.  
 
 [Sovellus Heroku-palvelimella](https://tsohalankku.herokuapp.com/)  
 
@@ -12,5 +12,6 @@ Tietokantasovellusharjoitus-kurssia varten toteutettu, yleistä lauta/chan-forma
 
 ## Kirjautuminen
 
-Sovelluksessa on olemassa järjestelmänvalvojatunnukset "test" salasanalla "test" ja "hello" salasanalla "world". Uusia tunnuksia voi luoda kirjoittamalla haluamansa nimen ja salasanan, ja antamamalla authorization keyn "auth".  
+Sovelluksessa on olemassa järjestelmänvalvojatunnukset "test" salasanalla "test" ja "hello" salasanalla "world".  
+Uusia tunnuksia voi luoda kirjoittamalla haluamansa nimen ja salasanan, ja antamamalla authorization keyn "auth".  
 **Huomioi kuitenkin, että salasanat eivät ole kryptattuja, joten älä käytä salasanaa jota käyttäisit jossain muualla.**
