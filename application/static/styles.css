@@ -103,6 +103,10 @@ body {
     background-color: rgb(215, 232, 255);
 }
 
+.supermessage-container {
+    background-color: rgb(183, 255, 189);
+}
+
 .message-text {
     padding: 0px;
     margin: 2px;

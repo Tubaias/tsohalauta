@@ -8,14 +8,18 @@ from application.threads.models import Thread
 
 @app.route("/t/<thread>/", methods=["GET"])
 def messages_index(thread):
-    messages = Message.query.filter_by(thread_id=thread).order_by(Message.id)
+    thread_object = Thread.query.get(thread)
+    messages = thread_object.messages
+    #messages = Message.query.filter_by(thread_id=thread).order_by(Message.id)
+    supermessages = thread_object.supermessages
+
     form = MessageForm()
     reply = request.args.get('reply')
     
     if reply != None:
         form.set_reply(reply)
 
-    return render_template("messages/list.html", messages = messages, thread = Thread.query.get(thread), form = form)
+    return render_template("messages/list.html", messages = messages, supermessages = supermessages, thread = thread_object, form = form)
 
 @app.route("/t/<thread>/", methods=["POST"])
 def messages_create(thread):

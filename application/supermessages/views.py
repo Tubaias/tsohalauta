@@ -28,3 +28,18 @@ def supermessages_create(board):
     db.session().commit()
 
     return redirect(url_for("boards_index", board=board))
+
+@app.route("/s/<super>/delete", methods = ["GET", "POST"])
+@login_required
+def supermessages_delete(super):
+    sm = SuperMessage.query.get(super)
+    thread = request.args.get('thread')
+
+    if sm is None:
+        return redirect(url_for("index"))
+
+    db.session.delete(sm)
+    current_user.actions_taken += 1
+    db.session.commit()
+
+    return redirect(url_for("index"))

@@ -24,7 +24,6 @@
           {% endif %}
           {{ thread.date_created }} |
           Thread No. {{ thread.id }}
-          
           <p class="message-text">{{ thread.text }}</p>
         </div>
       </td>
@@ -36,4 +35,11 @@
 <form>
   <button class=navbutton method="GET" formaction="{{ url_for('threads_create', board=board.id) }}">Create a new thread</button>
 </form>
+
+{% if current_user.is_authenticated %}
+<form>
+  <button class=navbutton method="GET" formaction="{{ url_for('supermessages_create', board=board.id) }}">Create a new boardwide message</button>
+</form>
+{% endif %}
+
 {% endblock %}

@@ -52,6 +52,27 @@ Thread No. {{ thread.id }}
 <p>{{ thread.text }}</p>
 
 <table>
+  {% for supermessage in supermessages %}
+  <tr>
+    <td>
+      <div class="container supermessage-container">
+        {% if current_user.is_authenticated %}
+        <form class=inlineform>
+          <button class=editbutton formaction="{{ url_for('supermessages_delete', super=supermessage.id, thread=thread.id) }}">delete</button>
+        </form>
+        {% endif %}
+        <b style="color: green">Boardwide message</b> |
+        <b class=mod-name>{{ supermessage.name }}</b> |
+        {{ supermessage.date_created}} | No. {{ supermessage.id}}
+        <br style="margin: 1px">
+        <p class="message-text">{{ supermessage.text }}</p>
+      </div>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table>
   {% for message in messages %}
   <tr>
     <td>
