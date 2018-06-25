@@ -13,6 +13,6 @@ class SuperMessage(Base):
         self.text = text
 
 ThreadSuperMessage = db.Table('ThreadSuperMessage',
-    db.Column('thread_id', db.Integer, db.ForeignKey('thread.id')),
-    db.Column('supermessage_id', db.Integer, db.ForeignKey('supermessage.id'))
+    db.Column('thread_id', db.Integer, db.ForeignKey('thread.id', ondelete="CASCADE")),
+    db.Column('supermessage_id', db.Integer, db.ForeignKey('supermessage.id', ondelete="CASCADE"))
 )

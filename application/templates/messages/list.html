@@ -58,7 +58,7 @@ Thread No. {{ thread.id }}
       <div class="container supermessage-container">
         {% if current_user.is_authenticated %}
         <form class=inlineform>
-          <button class=editbutton formaction="{{ url_for('supermessages_delete', super=supermessage.id, thread=thread.id) }}">delete</button>
+          <button class=editbutton formaction="{{ url_for('supermessages_delete', super=supermessage.id) }}">delete</button>
         </form>
         {% endif %}
         <b style="color: green">Boardwide message</b> |

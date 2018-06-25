@@ -33,7 +33,6 @@ def supermessages_create(board):
 @login_required
 def supermessages_delete(super):
     sm = SuperMessage.query.get(super)
-    thread = request.args.get('thread')
 
     if sm is None:
         return redirect(url_for("index"))
