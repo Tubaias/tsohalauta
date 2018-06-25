@@ -22,7 +22,9 @@ Järjestelmänvalvojan toimintoja:
 
 ## Arkkitehtuuri
 
-Sovellus käyttää tietojen tallentamiseen paikallisessa käytössä SQLite-tietokantaa ja Heroku-palvelimella PostgreSQL-tietokantaa.
+Sovellus käyttää tietojen tallentamiseen paikallisessa käytössä SQLite-tietokantaa ja Heroku-palvelimella PostgreSQL-tietokantaa. Tietokantatauluja on yhteensä seitsemän kappaletta, joista yksi on liitostaulu. Tietokannan luontiin ja hallinnointiin käytetään SQLAlchemy-liitännäistä.
+
+Tietokannan käytön luonteen takia sen tieto on jatkuvasti muuttuvaa. Tämän vuoksi tietokannassa ei käytetä mitään ylimääräisiä indeksejä.
 
 ### Tietokantakaavio
 
@@ -30,8 +32,95 @@ Sovellus käyttää tietojen tallentamiseen paikallisessa käytössä SQLite-tie
 
 ### Tietokannan normalisointi
 
-Tietokantatauluja on yhteensä seitsemän kappaletta ja ne ovat kaikki vähintään toisessa normaalimuodossa.  
+Kaikki tietokannan taulut ovat vähintään toisessa normaalimuodossa ja taulut _authkey_, _board_ ja _threadsupermessage_ ovat kolmannessa normaalimuodossa.  
 
 Taulu _moderator_ ei ole kolmannessa normaalimuodossa, koska sen sarake _username_ on uniikki jokaiselle moderaattorille, jolloin kaikki muut sarakkeet ovat sarakkeen _username_ kautta transitiivisesti riippuvaisia taulun pääavaimesta. Tämä on kuitenkin järkevä toteutus, koska sivulle ei haluta kahta käyttäjää, joilla on sama nimi.  
 
 Myöskään taulut _thread_, _message_ tai _supermessage_ eivät ole kolmannessa normaalimuodossa, koska kaikissa niissä on viestin tai langan luoneen moderaattorin nimeen viittaava sarake _name_, joka on sarakkeen _moderator_id_ kautta transitiivisesti riippuvainen pääavaimesta. Moderaattorin nimi tallennetaan tauluissa, koska tämä vähentää html-sivuille annettavien parametrien määrää huomattavasti ja näin yksinkertaistaa ja nopeuttaa ohjelmakoodia.
+
+### SQL CREATE TABLE -lauseet
+
+```SQL
+CREATE TABLE message (
+        id INTEGER NOT NULL, 
+        date_created DATETIME, 
+        date_modified DATETIME, 
+        name VARCHAR(144), 
+        text VARCHAR(500) NOT NULL, 
+        thread_id INTEGER NOT NULL, 
+        moderator_id INTEGER, 
+        reply_target_id INTEGER, 
+        PRIMARY KEY (id), 
+        FOREIGN KEY(thread_id) REFERENCES thread (id), 
+        FOREIGN KEY(moderator_id) REFERENCES moderator (id), 
+        FOREIGN KEY(reply_target_id) REFERENCES message (id)
+)
+```
+
+```SQL
+CREATE TABLE thread (
+        id INTEGER NOT NULL, 
+        date_created DATETIME, 
+        date_modified DATETIME, 
+        name VARCHAR(144), 
+        title VARCHAR(144), 
+        text VARCHAR(1000) NOT NULL, 
+        activity INTEGER, 
+        board_id INTEGER NOT NULL, 
+        moderator_id INTEGER, 
+        PRIMARY KEY (id), 
+        FOREIGN KEY(board_id) REFERENCES board (id), 
+        FOREIGN KEY(moderator_id) REFERENCES moderator (id)
+)
+```
+
+```SQL
+CREATE TABLE "ThreadSuperMessage" (
+        thread_id INTEGER, 
+        supermessage_id INTEGER, 
+        FOREIGN KEY(thread_id) REFERENCES thread (id) ON DELETE CASCADE, 
+        FOREIGN KEY(supermessage_id) REFERENCES supermessage (id) ON DELETE CASCADE
+)
+```
+
+```SQL
+CREATE TABLE supermessage (
+        id INTEGER NOT NULL, 
+        date_created DATETIME, 
+        date_modified DATETIME, 
+        name VARCHAR(144) NOT NULL, 
+        text VARCHAR(250) NOT NULL, 
+        moderator_id INTEGER, 
+        PRIMARY KEY (id), 
+        FOREIGN KEY(moderator_id) REFERENCES moderator (id)
+)
+
+```
+
+```SQL
+CREATE TABLE moderator (
+        id INTEGER NOT NULL, 
+        date_created DATETIME, 
+        date_modified DATETIME, 
+        username VARCHAR(144) NOT NULL, 
+        password VARCHAR(144) NOT NULL, 
+        actions_taken INTEGER, 
+        PRIMARY KEY (id)
+)
+```
+
+```SQL
+CREATE TABLE board (
+        id INTEGER NOT NULL, 
+        tag VARCHAR(3) NOT NULL, 
+        PRIMARY KEY (id)
+)
+```
+
+```SQL
+CREATE TABLE authkey (
+        id INTEGER NOT NULL, 
+        keycode VARCHAR(144) NOT NULL, 
+        PRIMARY KEY (id)
+)
+```
