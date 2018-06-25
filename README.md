@@ -2,15 +2,13 @@
 
 Tietokantasovellusharjoitus-kurssia varten toteutettu, yleistä lauta/chan-formaattia löysästi noudattava anonyymi keskustelufoorumi.  
 
-[Sovellus Herokussa](https://tsohalankku.herokuapp.com/)  
+[Sovellus Heroku-palvelimella](https://tsohalankku.herokuapp.com/)  
 
-[Kuvaus ja arkkitehtuuri](https://github.com/Tubaias/tsohalauta/blob/master/documentation/kuvaus%20ja%20arkkitehtuuri.md)
+[Sovelluksen Kuvaus ja arkkitehtuuri](https://github.com/Tubaias/tsohalauta/blob/master/documentation/kuvaus%20ja%20arkkitehtuuri.md)
 
 [Asennus- ja käyttöohje](https://github.com/Tubaias/tsohalauta/blob/master/documentation/asennus-%20ja%20k%C3%A4ytt%C3%B6ohje.md)  
 
 [User storyt](https://github.com/Tubaias/tsohalauta/blob/master/documentation/userstories.md)  
-
-[Tietokantakaaviohahmotelma](https://github.com/Tubaias/tsohalauta/blob/master/documentation/db_diagram.png)
 
 ## Kirjautuminen
 
