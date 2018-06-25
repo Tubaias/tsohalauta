@@ -4,40 +4,39 @@
 Käyttäjänä voin...
 - luoda uuden langan, jolla on otsikko ja jonkinlainen aloitusviesti.
 
-´´´SQL
+```SQL
 INSERT INTO thread (date_created, date_modified, name, title, text, activity, board_id, moderator_id) VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?)
-´´´
+```
 
 - selata laudalla olevia lankoja otsikon perusteella.
 
-´´´SQL
-´´´
+```SQL
+```
 
 - lukea langoissa olevia viestejä
 
-´´´SQL
-´´´
+```SQL
+```
 
 - kirjoittaa lankoihin uusia viestejä
 
-´´´SQL
+```SQL
 INSERT INTO message (date_created, date_modified, name, text, thread_id, moderator_id, reply_target_id) VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?)
-´´´
-
+```
 - hakea lankoja tai viestejä hakutekstin perusteella ja tarkastella haun tuloksia.
 
-´´´SQL
-´´´
+```SQL
+```
 
 - tarkastella aktiivisimpia foorumilla olevia lankoja.
 
-´´´SQL
-´´´
+```SQL
+```
 
 - tarkastella palstojen kokonaisaktiivisuutta.
 
-´´´SQL
-´´´
+```SQL
+```
 
 ## Järjestelmänvalvoja
 Järjestelmänvalvojana voin lisäksi...
