@@ -1,6 +1,6 @@
 # Tsohalauta
 
-Tietokantasovellusharjoitus-kurssia varten toteutettu harjoitustyö.  
+Tietokantasovellusharjoitus-kurssia varten toteutettu, yleistä lauta/chan-formaattia löysästi noudattava anonyymi keskustelufoorumi.  
 
 [Sovellus Herokussa](https://tsohalankku.herokuapp.com/)  
 
