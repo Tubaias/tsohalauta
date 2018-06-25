@@ -23,6 +23,9 @@ from application.messages import views
 from application.threads import models
 from application.threads import views
 
+from application.supermessages import models
+from application.supermessages import views
+
 from application.boards import models
 from application.boards import views
 
@@ -52,4 +55,5 @@ def load_user(user_id):
 try:
     db.create_all()
 except:
+    print("EXCEPTION EXCEPTION EXCEPTION EXCEPTION EXCEPTION EXCEPTION EXCEPTION")
     pass

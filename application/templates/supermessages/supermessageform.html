@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% for validationerror in form.text.errors %}
+  <p style="color:firebrick">Text: {{ validationerror }}</p>
+{% endfor %}
+
+<form method="POST" action="{{ url_for('supermessages_create', board=board) }}">
+  <table>
+    <tr>
+      <td>
+	      {{ form.text.label }}
+      </td>
+      <td>
+	      {{ form.text(rows=1, cols=70) }}
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+	      <input type="submit" value="Create supermessage"/>
+      </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}
