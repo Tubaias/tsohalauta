@@ -1,6 +1,8 @@
 # Sovelluksen kuvaus ja -arkkitehtuuri
 
-## Aihekuvaus
+## Sovelluksen kuvaus
+
+### Aihekuvaus
 
 Harjoitustyö on yleistä lauta/chan-formaattia löysästi noudattava anonyymi keskustelufoorumi. Foorumilla on kolme vakinaista palstaa, joihin sivun käyttäjät voivat tehdä uusia lankoja, joihin taas voi kirjoittaa viestejä. 
 
@@ -8,17 +10,11 @@ Sivulla on kirjautumismahdollisuus, joka on tarkoitettu ainoastaan järjestelmä
 
 Vain 20 lankaa per palsta säilytetään kerralla. Kun uusi lanka luodaan, palstan sillä hetkellä vähiten aktiivinen lanka poistetaan lopullisesti. Jokaisessa langassa voi olla maksimissaan 100 viestiä, jonka jälkeen uusia viestejä ei voi luoda lankaan. Foorumilla on myös mahdollisuus tarkastella tilastoja, kuten olemassaolevien lankojen määrää ja aktiivisuutta ja palstojen kokonaisaktiivisuutta. Lisäksi viestejä tai lankoja voi hakea foorumilta hakusanan perusteella.
 
-Peruskäyttäjän toimintoja:
-- Langan luominen
-- Viestin luominen
-- Langan tai viestin hakeminen
-- Tilastojen katselu
+### Rajoitteet ja puuttuvat ominaisuudet
 
-Järjestelmänvalvojan toimintoja:
-- Järjestelmänvalvojatiliin kirjautuminen
-- Järjestelmänvalvojan nimellä varustetun viestin tai superviestin luominen
-- Langan muokkaus tai poistaminen
-- Viestin muokkaus tai poistaminen
+Sovelluksen toiminnallisuus on suurimmaksi osin toivotun mukaista, mutta pieniä rajoitteita esiintyy. Esimerkiksi langan aloitusviestiin tai superviesteihin ei voi vastata toisella viestillä ja uusia palstoja tai autorisointiavaimia ei voi luoda sovelluksen sisällä. Tätä varten olisi kenties kannattanut lisätä korkeamman tason hallinnointikäyttäjä, joka pystyisi poistamaan moderaattorikäyttäjiä ja hallinnoimaan muita tietokannan ominaisuuksia.
+
+Sovelluksella oli myös paljon suunniteltuja ominaisuuksia, joiden lisäämiseen ei ollut aikaa. Tällaisia puuttuvia ominaisuuksia ovat esimerkiksi kuvien lisääminen viesteihin, moneen viestiin vastaaminen yhdellä viestillä ja viestin vastauksien näyttäminen viestin kohdalla.
 
 ## Arkkitehtuuri
 
