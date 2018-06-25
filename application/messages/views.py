@@ -9,8 +9,7 @@ from application.threads.models import Thread
 @app.route("/t/<thread>/", methods=["GET"])
 def messages_index(thread):
     thread_object = Thread.query.get(thread)
-    messages = thread_object.messages
-    #messages = Message.query.filter_by(thread_id=thread).order_by(Message.id)
+    messages = Message.query.filter_by(thread_id=thread).order_by(Message.id)
     supermessages = thread_object.supermessages
 
     form = MessageForm()
