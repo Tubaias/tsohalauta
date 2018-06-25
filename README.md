@@ -1,8 +1,10 @@
 # Tsohalauta
 
-Tietokantasovellusharjoitus-kurssia varten toteutettava harjoitustyö.  
+Tietokantasovellusharjoitus-kurssia varten toteutettu harjoitustyö.  
 
 [Sovellus Herokussa](https://tsohalankku.herokuapp.com/)  
+
+[Asennus- ja käyttöohje](https://github.com/Tubaias/tsohalauta/blob/master/documentation/asennus-%20ja%20k%C3%A4ytt%C3%B6ohje.md)  
 
 [User storyt](https://github.com/Tubaias/tsohalauta/blob/master/documentation/userstories.md)  
 
@@ -29,6 +31,6 @@ Peruskäyttäjän toimintoja:
 
 Järjestelmänvalvojan toimintoja:
 - Järjestelmänvalvojatiliin kirjautuminen
-- Järjestelmänvalvojan nimellä varustetun viestin luominen
+- Järjestelmänvalvojan nimellä varustetun viestin tai superviestin luominen
 - Langan muokkaus tai poistaminen
 - Viestin muokkaus tai poistaminen
