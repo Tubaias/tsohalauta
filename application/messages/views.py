@@ -48,8 +48,7 @@ def messages_create(thread):
     for t in threads:
         t.activity -= 1
 
-    current_thread = Thread.query.get(thread)
-    current_thread.activity += Thread.query.count() + 1
+    thread_object.activity += Thread.query.count() + 1
     db.session().add(m)
     db.session().commit()
   

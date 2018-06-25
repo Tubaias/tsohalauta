@@ -5,7 +5,7 @@ class SuperMessage(Base):
     __tablename__ = 'supermessage'
     
     name = db.Column(db.String(144), nullable=False)
-    text = db.Column(db.String(1000), nullable=False)
+    text = db.Column(db.String(250), nullable=False)
     moderator_id = db.Column(db.Integer, db.ForeignKey('moderator.id'), default=None)
 
     def __init__(self, name, text):

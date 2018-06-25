@@ -3,7 +3,7 @@ from application.models import Base
 
 class Message(Base):
     name = db.Column(db.String(144), default="Anonymous")
-    text = db.Column(db.String(1000), nullable=False)
+    text = db.Column(db.String(500), nullable=False)
     thread_id = db.Column(db.Integer, db.ForeignKey('thread.id'), nullable=False)
     moderator_id = db.Column(db.Integer, db.ForeignKey('moderator.id'), default=None)
 
